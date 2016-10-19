@@ -20,7 +20,7 @@ import scala.collection.Map
 import org.apache.hadoop.io.compress.CompressionCodec
 
 import org.apache.spark.sql.{DataFrame, SQLContext}
-import com.databricks.spark.xml.util.XmlFile
+import com.databricks.spark.xml.util.MRv1XmlFile
 
 package object xml {
   /**
@@ -49,7 +49,7 @@ package object xml {
         "valueTag" -> valueTag,
         "charset" -> charset)
       val xmlRelation = XmlRelation(
-        () => XmlFile.withCharset(sqlContext.sparkContext, filePath, charset, rowTag),
+        () => MRv1XmlFile.withCharset(sqlContext.sparkContext, filePath, charset, rowTag),
         location = Some(filePath),
         parameters = parameters.toMap)(sqlContext)
       sqlContext.baseRelationToDataFrame(xmlRelation)
@@ -87,7 +87,7 @@ package object xml {
         .orElse(Option(compressionCodec).map(_.getCanonicalName))
         .orNull
       mutableParams.put("codec", safeCodec)
-      XmlFile.saveAsXmlFile(dataFrame, path, mutableParams.toMap)
+      MRv1XmlFile.saveAsXmlFile(dataFrame, path, mutableParams.toMap)
     }
   }
 }

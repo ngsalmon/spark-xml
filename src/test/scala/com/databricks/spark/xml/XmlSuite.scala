@@ -74,6 +74,7 @@ class XmlSuite extends FunSuite with BeforeAndAfterAll {
   override protected def beforeAll(): Unit = {
     super.beforeAll()
     sqlContext = new SQLContext(new SparkContext("local[2]", "XmlSuite"))
+//    sqlContext.setConf("spark.sql.warehouse.dir", "file:///c:/tmp/spark-warehouse")
   }
 
   override protected def afterAll(): Unit = {

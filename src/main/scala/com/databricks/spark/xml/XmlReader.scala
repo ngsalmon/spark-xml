@@ -18,7 +18,7 @@ package com.databricks.spark.xml
 import org.apache.spark.rdd.RDD
 import org.apache.spark.sql.{DataFrame, SQLContext}
 import org.apache.spark.sql.types.StructType
-import com.databricks.spark.xml.util.XmlFile
+import com.databricks.spark.xml.util.MRv1XmlFile
 
 /**
  * A collection of static functions for working with XML files in Spark SQL
@@ -96,7 +96,7 @@ class XmlReader extends Serializable {
       (options.charset, options.rowTag)
     }
     val relation: XmlRelation = XmlRelation(
-      () => XmlFile.withCharset(sqlContext.sparkContext, path, charset, rowTag),
+      () => MRv1XmlFile.withCharset(sqlContext.sparkContext, path, charset, rowTag),
       Some(path),
       parameters.toMap,
       schema)(sqlContext)

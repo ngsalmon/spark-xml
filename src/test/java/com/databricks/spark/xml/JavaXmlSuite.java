@@ -39,6 +39,7 @@ public class JavaXmlSuite {
     @Before
     public void setUp() {
         sqlContext = new SQLContext(new SparkContext("local[2]", "JavaXmlSuite"));
+//        sqlContext.setConf("spark.sql.warehouse.dir","file:///c:/tmp/spark-warehouse");
     }
 
     @After
